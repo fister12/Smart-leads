@@ -1,0 +1,34 @@
+services:
+  # Backend Node.js API
+  - type: web
+    name: smart-leads-api
+    env: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "5000"
+      - key: MONGO_URI
+        sync: false # You must set your MongoDB Atlas connection string in the Render Dashboard
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        value: https://smart-leads-client.onrender.com # Default Render URL format for the client
+
+  # Frontend React SPA
+  - type: web
+    name: smart-leads-client
+    env: static
+    plan: free
+    rootDir: client
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://smart-leads-api.onrender.com/api # Maps to the backend service above
