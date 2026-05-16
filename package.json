@@ -1,0 +1,9 @@
+{
+  "name": "smart-leads-dashboard",
+  "version": "1.0.0",
+  "description": "Complete B2B SaaS application with MERN stack",
+  "private": true,
+  "scripts": {
+    "setup": "npm install && cd server && npm install && cd ../client && npm install && cd .."
+  }
+}
